@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:replace="~{/components/common :: header(value='Game')}"></div>
+<div th:replace="~{/components/common :: navbar}"></div>
+<body class="bg-light">
+<div class="container">
+    <!--    <h3>-> What's your name?</h3>-->
+    <br/>
+    <div class="d-flex justify-content-between">
+        <div class="col-10 alert alert-primary" role="alert">
+            <h1><small th:text="${question.getContext()}"></small></h1>
+        </div>
+        <svg height="100" width="100">
+            <circle cx="50" cy="50" r="40" stroke="blue" stroke-width="3" fill="white"/>
+            <text x="50" y="59" fill="#472e12" font-size="30px" text-anchor="middle" id="demo2">
+                10
+            </text>
+        </svg>
+    </div>
+
+    <br/><br/>
+
+    <th:block th:each="answer : ${question.getAnswers()}">
+        <form class="mb-2" action="/game" method="post">
+            <input type="hidden" th:name="id" th:value="${answer.getId()}">
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+            <button class="col-5 btn btn-outline-primary"
+                    th:text="${answer.getContext()}"></button>
+        </form>
+    </th:block>
+
+<!--    <form action="/game" method="post">
+        <input type="hidden" th:name="id" th:value="${question.getAnswers().toArray()[0].getId()}">
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+        <button class="col-5 btn btn-outline-primary"
+                th:text="${question.getAnswers().toArray()[0].getContext()}"></button>
+    </form>
+    <form action="/game" method="post">
+        <input type="hidden" th:name="id" th:value="${question.getAnswers().toArray()[1].getId()}">
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+        <button class="col-5 btn btn-outline-primary"
+                th:text="${question.getAnswers().toArray()[1].getContext()}"></button>
+    </form>
+    <form action="/game" method="post">
+        <input type="hidden" th:name="id" th:value="${question.getAnswers().toArray()[2].getId()}">
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+        <button class="col-5 btn btn-outline-primary"
+                th:text="${question.getAnswers().toArray()[2].getContext()}"></button>
+    </form>-->
+</div>
+</body>
+</html>
+<script src="/timer.js"></script>
