@@ -41,7 +41,7 @@ public class GameController {
     public String game(@AuthenticationPrincipal User user, Model model){
         if(counter == 0) userAnswers.clear();
         if(counter > 0) userAnswers.add(new Answer("", false));
-        if(counter==5) return endGame(model, user);
+        if(counter==5) return endGame(model, user, false);
         model.addAttribute("username", user.getUsername());
         model.addAttribute("question", questions.get(counter++));
         return "game";
@@ -54,18 +54,23 @@ public class GameController {
         Answer answer = answerService.getAnswerById(Integer.parseInt(id));
         userAnswers.add(answer);
         gameService.checkAnswer(answer, counter, user);
-        if(counter==5) return endGame(model, user);
+        if(counter==5) return endGame(model, user, false);
         model.addAttribute("question", questions.get(counter++));
         return "game";
     }
 
-    private String endGame(Model model, User user){
+    private String endGame(Model model, User user, boolean stopGame){
         counter = 0;
         model.addAttribute("questions",questions);
         model.addAttribute("answers",userAnswers);
         model.addAttribute("username", user.getUsername());
         questions = questionService.random5();
-        gameService.getVerdicts(model);
+        gameService.getVerdicts(model,stopGame, user);
         return "results";
+    }
+
+    @GetMapping("/endgame")
+    public String end(@AuthenticationPrincipal User user, Model model){
+        return endGame(model, user, true);
     }
 }

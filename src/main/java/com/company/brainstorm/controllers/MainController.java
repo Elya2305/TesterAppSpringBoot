@@ -2,7 +2,6 @@ package com.company.brainstorm.controllers;
 
 import com.company.brainstorm.domains.User;
 import com.company.brainstorm.services.UserService;
-import org.dom4j.rule.Mode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -11,7 +10,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.*;
+import java.util.Comparator;
+import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -26,8 +26,6 @@ public class MainController {
     public MainController(UserService userService) {
         this.userService = userService;
         this.users = userService.getAllUsers();
-        totalGames = getList(userService::totalGame);
-        avgScore = getList(userService::avgScore);
     }
 
     @GetMapping(value = {"/profile", "/"})
@@ -58,9 +56,22 @@ public class MainController {
         return "profile";
     }
 
-    @GetMapping("/statistics")
+    @GetMapping(value = {"/statistics", "/statistics/tg"})
     public String getStatistics(Model model){
         users.sort(Comparator.comparingInt(o -> userService.totalGame((User) o)).reversed());
+        totalGames = getList(userService::totalGame);
+        avgScore = getList(userService::avgScore);
+        model.addAttribute("users", users)
+                .addAttribute("totalGames",totalGames)
+                .addAttribute("avgScore", avgScore);
+        return "statistics";
+    }
+
+    @GetMapping("/statistics/avg")
+    public String orderByAvgScore(Model model){
+        users.sort(Comparator.comparingDouble(o -> userService.avgScore((User) o)).reversed());
+        totalGames = getList(userService::totalGame);
+        avgScore = getList(userService::avgScore);
         model.addAttribute("users", users)
                 .addAttribute("totalGames",totalGames)
                 .addAttribute("avgScore", avgScore);

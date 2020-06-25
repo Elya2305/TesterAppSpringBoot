@@ -29,7 +29,10 @@ public class GameService {
         }
     }
 
-    public void getVerdicts(Model model) {
+    public void getVerdicts(Model model, boolean stopGame, User user) {
+        if(stopGame){
+            game = new Game(user, score, score >= 3);
+        }
         if(game.getScore() >= 3){
             model.addAttribute("verdict","Congratulations! You've won. Your score is " + game.getScore());
             model.addAttribute("win", true);

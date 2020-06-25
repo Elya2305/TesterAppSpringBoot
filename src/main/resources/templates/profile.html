@@ -1,16 +1,8 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<!--<head>
-    <title>Profile</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
-</head>-->
-<body>
 <div th:replace="~{/components/common :: header(value='Profile')}"></div>
-<div th:replace="~{/components/common :: navbar}"></div>
+<div th:replace="~{/components/common :: navbar(game=false)}"></div>
+<body>
 <div class="bg-light">
     <div class="container bg-light">
         <br/>

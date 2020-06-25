@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <div th:replace="~{/components/common :: header(value='Results')}"></div>
-<div th:replace="~{/components/common :: navbar}"></div>
+<div th:replace="~{/components/common :: navbar(game=false)}"></div>
 <body class="bg-light">
 <div class="container">
     <br/>
@@ -19,7 +19,8 @@
             <tr th:each="qv,iter : ${questions}">
                 <td th:text="${iter.index} + 1"></td>
                 <td th:text="${qv.getContext()}"></td>
-                <td th:text="${answers.get(__${iter.index}__).getContext()}"></td>
+                <td th:if="${(iter.index) < #lists.size(answers)}" th:text="${answers.get(__${iter.index}__).getContext()}"></td>
+                <td th:unless="${(iter.index) < #lists.size(answers)}" th:text="''"></td>
                 <td th:text="${qv.getCorrectAnswer().getContext()}"></td>
             </tr>
         </tbody>

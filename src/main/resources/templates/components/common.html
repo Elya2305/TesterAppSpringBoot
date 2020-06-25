@@ -9,7 +9,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 </head>
 <body>
-<nav th:fragment="navbar" class="navbar navbar-expand-lg navbar-light" style="background-color: #ededed;">
+<nav th:fragment="navbar(game)" class="navbar navbar-expand-lg navbar-light" style="background-color: #ededed;">
     <a class="navbar-brand" href="#">
         <img src="https://i.pinimg.com/originals/41/00/09/4100098c8af8b04589771aa58935f4c8.png" width="30" height="30" class="d-inline-block align-top" alt="">
         BrainStorm
@@ -20,13 +20,16 @@
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
             <li class="nav-item active">
-                <a class="nav-link" href="/profile">Home <span class="sr-only">(current)</span></a>
+                <a th:class="${game}? 'nav-link disabled' : 'nav-link'" href="/profile">Home <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/statistics">Statistics</a>
+                <a th:class="${game}? 'nav-link disabled' : 'nav-link'" href="/statistics">Statistics</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/game">Game</a>
+            <li  class="nav-item">
+                <a th:class="${game}? 'nav-link disabled' : 'nav-link'" href="/game">Game</a>
+            </li>
+            <li th:if="${game}">
+                <a class="nav-link" href="/endgame">End Game</a>
             </li>
         </ul>
     </div>
