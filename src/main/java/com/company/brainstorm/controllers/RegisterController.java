@@ -16,13 +16,12 @@ public class RegisterController {
 
     @PostMapping("/registration")
     public String addUser(User user, Model model){
-        System.out.println("User before: " + user);
         if(!user.getPassword().equals(user.getConfirmPassword())){
             model.addAttribute("message", "Check your password input");
             return "registration";
         }
         boolean addUser = userService.addUser(user);
-        System.out.println("User after: " + user);
+        System.out.println("User after registr: " + user);
         if(addUser){
             return "redirect:/login";
         }

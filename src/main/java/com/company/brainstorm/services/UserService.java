@@ -12,6 +12,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UserService implements UserDetailsService {
 
@@ -44,23 +46,30 @@ public class UserService implements UserDetailsService {
     }
 
     public int totalGame(User user){
-        System.out.println("user: " + user);
-        return gameRepository.findByUser(user).size();
+        Integer totalGame = gameRepository.findByUser(user).size();
+        return totalGame == null ? 0 : totalGame;
     }
 
     public int totalWin(User user){
-        return gameRepository.findByUserAndWin(user, true).size();
+        Integer totalWin = gameRepository.findByUserAndWin(user, true).size();
+        return totalWin == null ? 0 :  totalWin;
     }
 
     public int maxScore(User user){
-        return gameRepository.findMaxScore(user);
+        Integer masScore = gameRepository.findMaxScore(user);
+        return masScore == null ? 0 : masScore;
     }
 
     public double avgScore(User user){
-        return gameRepository.findAvrScore(user);
+        Double avgScore = gameRepository.findAvrScore(user);
+        return avgScore == null ? 0.0 : avgScore;
     }
 
     public void save(User user) {
         userRepository.save(user);
+    }
+
+    public List<User> getAllUsers() {
+       return userRepository.findAll();
     }
 }

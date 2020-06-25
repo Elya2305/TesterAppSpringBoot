@@ -2,6 +2,7 @@ package com.company.brainstorm.controllers;
 
 import com.company.brainstorm.domains.User;
 import com.company.brainstorm.services.UserService;
+import org.dom4j.rule.Mode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -10,10 +11,24 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.*;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+
 @Controller
 public class MainController {
-    @Autowired
     UserService userService;
+    List<Integer> totalGames;
+    List<Double> avgScore;
+    List<User> users;
+
+    @Autowired
+    public MainController(UserService userService) {
+        this.userService = userService;
+        this.users = userService.getAllUsers();
+        totalGames = getList(userService::totalGame);
+        avgScore = getList(userService::avgScore);
+    }
 
     @GetMapping(value = {"/profile", "/"})
     public String profile(@AuthenticationPrincipal User user, Model model){
@@ -41,5 +56,20 @@ public class MainController {
         }
         addCommonAttributes(user,model);
         return "profile";
+    }
+
+    @GetMapping("/statistics")
+    public String getStatistics(Model model){
+        users.sort(Comparator.comparingInt(o -> userService.totalGame((User) o)).reversed());
+        model.addAttribute("users", users)
+                .addAttribute("totalGames",totalGames)
+                .addAttribute("avgScore", avgScore);
+        return "statistics";
+    }
+
+    private <T extends Number> List<T> getList(Function<User,T> func) {
+        return users.stream()
+                .map(func)
+                .collect(Collectors.toList());
     }
 }

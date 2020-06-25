@@ -13,6 +13,4 @@ public class AnswerService {
     public Answer getAnswerById(int id){
         return answerRepository.findById(id);
     }
-
-
 }
