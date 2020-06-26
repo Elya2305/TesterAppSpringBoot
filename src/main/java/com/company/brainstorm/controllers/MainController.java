@@ -28,6 +28,7 @@ public class MainController {
         this.users = userService.getAllUsers();
     }
 
+
     @GetMapping(value = {"/profile", "/"})
     public String profile(@AuthenticationPrincipal User user, Model model){
         addCommonAttributes(user, model);
