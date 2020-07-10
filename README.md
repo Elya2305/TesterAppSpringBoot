@@ -26,6 +26,8 @@ There are only 5 questions available.
 Again, it's only a _simulation_ for 
 studying purposes. 
 
+There's also the second version available: https://github.com/Elya2305/TesterAppSpringBoot2.0
+
 Have fun :)
 
 
