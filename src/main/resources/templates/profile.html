@@ -26,7 +26,6 @@
                 <input disabled type="email" name="email" th:placeholder="${email}">
             </div>
         </div>
-        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
         <button type="submit" class="btn btn-primary">Change</button>
     </form>
         <hr class="my-4">
@@ -54,4 +53,5 @@
     </div>
 </div>
 </body>
+<div th:replace="~{/components/common :: js-lb}"></div>
 </html>

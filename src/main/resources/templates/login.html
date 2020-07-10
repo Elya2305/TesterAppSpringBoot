@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <title>Register</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"/>
-<!--    <script src="/script.js"></script>-->
-</head>
+<!--<head>-->
+<!--    <title>Register</title>-->
+<!--    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>-->
+<!--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"/>-->
+<!--</head>-->
+<div th:replace="~{/components/common :: header(value='Login')}"></div>
 <body class="text-center bg-light">
 <div class="container">
     <div class="col-5 mx-auto">
@@ -26,15 +26,9 @@
                     <div class="alert alert-danger" th:text="${message}"></div>
                 </div>
                 <label for="inputEmail" class="sr-only">Email address</label>
-                <!--    <div class="col-sm-8">-->
                 <input type="email" id="inputEmail" name="email" class="my-2 form-control" placeholder="Email address" required autofocus>
                 <label for="inputPassword" class="sr-only">Password</label>
                 <input type="password" id="inputPassword" name="password" class="my-2 form-control" placeholder="Password" required>
-                <div class="checkbox mb-3">
-                    <label>
-                        <input type="checkbox" value="remember-me"> Remember me
-                    </label>
-                </div>
                 <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
                 <br/>
                 <div class="etc-login-form">
@@ -45,6 +39,6 @@
         </div>
     </div>
 </div>
-
 </body>
+<div th:replace="~{/components/common :: js-lb}"></div>
 </html>

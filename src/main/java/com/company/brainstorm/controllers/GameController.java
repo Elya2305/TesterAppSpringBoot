@@ -32,14 +32,17 @@ public class GameController {
         this.questionService = questionService;
         this.gameService = gameService;
         this.answerService = answerService;
-        this.questions = questionService.random5();
+//        this.questions = questionService.random5();
         this.counter = 0;
         this.userAnswers = new ArrayList<>();
     }
 
     @GetMapping("/game")
     public String game(@AuthenticationPrincipal User user, Model model){
-        if(counter == 0) userAnswers.clear();
+        if(counter == 0) {
+            userAnswers.clear();
+            this.questions = questionService.random5();
+        }
         if(counter > 0) userAnswers.add(new Answer("", false));
         if(counter==5) return endGame(model, user, false);
         model.addAttribute("username", user.getUsername());
@@ -64,7 +67,7 @@ public class GameController {
         model.addAttribute("questions",questions);
         model.addAttribute("answers",userAnswers);
         model.addAttribute("username", user.getUsername());
-        questions = questionService.random5();
+//        questions = questionService.random5();
         gameService.getVerdicts(model,stopGame, user);
         return "results";
     }

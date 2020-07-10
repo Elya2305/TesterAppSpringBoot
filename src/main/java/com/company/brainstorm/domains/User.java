@@ -7,6 +7,9 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Set;
@@ -17,11 +20,15 @@ public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @NotBlank
     private String username;
+    @NotBlank
     private String password;
     @Transient
     private String confirmPassword;
     private boolean active;
+    @NotBlank
+    @Email
     private String email;
     private String activationCode;
 

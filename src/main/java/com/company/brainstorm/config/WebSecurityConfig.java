@@ -37,7 +37,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                     .authorizeRequests()
-                    .antMatchers("/registration", "/json",/*"/static/**"*/ "/activate/*").permitAll()
+                    .antMatchers("/registration", "/h2-console/**", "/static/**", "/validation.js","validation.js").permitAll()
                     .anyRequest().authenticated()
                 .and()
                     .formLogin()
@@ -48,6 +48,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                     .logout()
                     .permitAll();
+
+                http.csrf().disable(); //just for h2 console see (got 403 error - Forbidden)
+                http.headers().frameOptions().disable();
     }
 
     @Override

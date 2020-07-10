@@ -15,7 +15,9 @@ public class Question {
     private Set<Answer> answers;
     public Question() {
     }
-
+    public Question(String context) {
+        this.context = context;
+    }
     public Integer getId() {
         return id;
     }

@@ -19,7 +19,6 @@ public class Game {
         this.score = score;
         this.win = win;
     }
-
     public Game(){
 
     }

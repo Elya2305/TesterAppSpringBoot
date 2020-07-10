@@ -5,8 +5,15 @@ import com.company.brainstorm.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Errors;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import javax.validation.Valid;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Controller
 public class RegisterController {
@@ -15,13 +22,16 @@ public class RegisterController {
     UserService userService;
 
     @PostMapping("/registration")
-    public String addUser(User user, Model model){
+    public String addUser(@Valid User user, Errors errors, Model model){
+        if(errors.hasErrors()){
+            model.addAttribute("error", true);
+            return "registration";
+        }
         if(!user.getPassword().equals(user.getConfirmPassword())){
             model.addAttribute("message", "Check your password input");
             return "registration";
         }
         boolean addUser = userService.addUser(user);
-        System.out.println("User after registr: " + user);
         if(addUser){
             return "redirect:/login";
         }
@@ -31,7 +41,6 @@ public class RegisterController {
 
     @GetMapping("/registration")
     public String register(){
-//        System.out.println(user);
         return "registration";
     }
 

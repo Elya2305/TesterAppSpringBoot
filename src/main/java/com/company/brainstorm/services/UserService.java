@@ -39,7 +39,7 @@ public class UserService implements UserDetailsService {
             return false;
         }
         user.setActive(true);
-        user.setRole(roleRepository.getOne(1L));
+        user.setRole(roleRepository.findByRole("USER"));
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
         return true;

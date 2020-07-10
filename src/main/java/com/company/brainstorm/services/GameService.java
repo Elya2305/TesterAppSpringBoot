@@ -32,6 +32,7 @@ public class GameService {
     public void getVerdicts(Model model, boolean stopGame, User user) {
         if(stopGame){
             game = new Game(user, score, score >= 3);
+            gameRepository.save(game);
         }
         if(game.getScore() >= 3){
             model.addAttribute("verdict","Congratulations! You've won. Your score is " + game.getScore());

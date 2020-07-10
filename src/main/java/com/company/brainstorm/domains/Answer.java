@@ -20,6 +20,12 @@ public class Answer {
         this.correct = correct;
     }
 
+    public Answer(String context, boolean correct, Question question) {
+        this.context = context;
+        this.correct = correct;
+        this.question = question;
+    }
+
     public Answer() {
     }
 

@@ -25,12 +25,11 @@ public class MainController {
     @Autowired
     public MainController(UserService userService) {
         this.userService = userService;
-        this.users = userService.getAllUsers();
     }
 
 
     @GetMapping(value = {"/profile", "/"})
-    public String profile(@AuthenticationPrincipal User user, Model model){
+    public String profile(@AuthenticationPrincipal User user, Model model) {
         addCommonAttributes(user, model);
         return "profile";
     }
@@ -45,41 +44,45 @@ public class MainController {
     }
 
     @PostMapping("/profile/change")
-    public String change(@RequestParam String username, @AuthenticationPrincipal User user, Model model){
-        if(username.isBlank() || username.equals(user.getUsername())){
+    public String change(@RequestParam String username, @AuthenticationPrincipal User user, Model model) {
+        if (username.isBlank() || username.equals(user.getUsername())) {
             model.addAttribute("error", "New username can't be blank or the same!");
-        }else{
+        } else {
             user.setUsername(username);
+
             userService.save(user);
             model.addAttribute("success", "Username was successfully changed");
         }
-        addCommonAttributes(user,model);
+        addCommonAttributes(user, model);
         return "profile";
     }
 
     @GetMapping(value = {"/statistics", "/statistics/tg"})
-    public String getStatistics(Model model){
+    public String getStatistics(Model model) {
+        this.users = userService.getAllUsers();
+        System.out.println("All users: " + userService.getAllUsers());
+        System.out.println("All users2: " + users.toString());
         users.sort(Comparator.comparingInt(o -> userService.totalGame((User) o)).reversed());
         totalGames = getList(userService::totalGame);
         avgScore = getList(userService::avgScore);
         model.addAttribute("users", users)
-                .addAttribute("totalGames",totalGames)
+                .addAttribute("totalGames", totalGames)
                 .addAttribute("avgScore", avgScore);
         return "statistics";
     }
 
     @GetMapping("/statistics/avg")
-    public String orderByAvgScore(Model model){
+    public String orderByAvgScore(Model model) {
         users.sort(Comparator.comparingDouble(o -> userService.avgScore((User) o)).reversed());
         totalGames = getList(userService::totalGame);
         avgScore = getList(userService::avgScore);
         model.addAttribute("users", users)
-                .addAttribute("totalGames",totalGames)
+                .addAttribute("totalGames", totalGames)
                 .addAttribute("avgScore", avgScore);
         return "statistics";
     }
 
-    private <T extends Number> List<T> getList(Function<User,T> func) {
+    private <T extends Number> List<T> getList(Function<User, T> func) {
         return users.stream()
                 .map(func)
                 .collect(Collectors.toList());
