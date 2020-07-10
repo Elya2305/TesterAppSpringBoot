@@ -4,7 +4,6 @@
 <div th:replace="~{/components/common :: navbar(game=true)}"></div>
 <body class="bg-light">
 <div class="container">
-    <!--    <h3>-> What's your name?</h3>-->
     <br/>
     <div class="d-flex justify-content-between">
         <div class="col-10 alert alert-primary" role="alert">
@@ -23,7 +22,6 @@
     <th:block th:each="answer : ${question.getAnswers()}">
         <form class="mb-2" action="/game" method="post">
             <input type="hidden" th:name="id" th:value="${answer.getId()}">
-<!--            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>-->
             <button class="col-5 btn btn-outline-primary"
                     th:text="${answer.getContext()}"></button>
         </form>

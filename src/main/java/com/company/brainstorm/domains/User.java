@@ -37,6 +37,7 @@ public class User implements UserDetails {
     private Role role;
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
     private Set<Game> games;
+
     @Override
     public String toString() {
         return "User{" +

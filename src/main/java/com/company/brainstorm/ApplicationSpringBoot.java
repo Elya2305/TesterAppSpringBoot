@@ -32,7 +32,7 @@ public class ApplicationSpringBoot implements CommandLineRunner {
     }
 
     @Override
-    public void run(String... args) throws Exception {
+    public void run(String... args) {
         Question question1 = new Question("How many rings does the Olympic flag have?");
         Question question2 = new Question("How many carats are in pure gold?");
         Question question3 = new Question("The capital of Madagascar?");

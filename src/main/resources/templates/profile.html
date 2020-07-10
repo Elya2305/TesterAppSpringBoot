@@ -12,44 +12,44 @@
         <div th:if="${success}">
             <div class="alert alert-success" th:text="${success}"></div>
         </div>
-    <form method="post" action="/profile/change">
-        <h2 class="h5 font-weight-normal">Your info:</h2>
-        <div class="form-group row">
-            <label class="col-sm-2 col-form-label">Username: </label>
-            <div class="col-sm-8">
-                <input type="text" name="username" th:placeholder="${username}">
+        <form method="post" action="/profile/change">
+            <h2 class="h5 font-weight-normal">Your info:</h2>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Username: </label>
+                <div class="col-sm-8">
+                    <input type="text" name="username" th:placeholder="${username}">
+                </div>
             </div>
-        </div>
-        <div class="form-group row">
-            <label class="col-sm-2 col-form-label">Email: </label>
-            <div class="col-sm-8">
-                <input disabled type="email" name="email" th:placeholder="${email}">
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Email: </label>
+                <div class="col-sm-8">
+                    <input disabled type="email" name="email" th:placeholder="${email}">
+                </div>
             </div>
-        </div>
-        <button type="submit" class="btn btn-primary">Change</button>
-    </form>
+            <button type="submit" class="btn btn-primary">Change</button>
+        </form>
         <hr class="my-4">
         <h3 class="h5 mb-3 font-weight-normal">Your statistics:</h3>
         <table class="table table-hover">
-        <tbody>
-        <tr>
-            <td>Total game: </td>
-            <td th:text="${totalGame}">0</td>
-        </tr>
-        <tr>
-            <td>Win: </td>
-            <td th:text="${totalWin}">0</td>
-        </tr>
-        <tr>
-            <td>Max score: </td>
-            <td th:text="${maxScore}">0</td>
-        </tr>
-        <tr>
-            <td>Average score: </td>
-            <td th:text="${avgScore}">0</td>
-        </tr>
-        </tbody>
-    </table>
+            <tbody>
+            <tr>
+                <td>Total game:</td>
+                <td th:text="${totalGame}">0</td>
+            </tr>
+            <tr>
+                <td>Win:</td>
+                <td th:text="${totalWin}">0</td>
+            </tr>
+            <tr>
+                <td>Max score:</td>
+                <td th:text="${maxScore}">0</td>
+            </tr>
+            <tr>
+                <td>Average score:</td>
+                <td th:text="${avgScore}">0</td>
+            </tr>
+            </tbody>
+        </table>
     </div>
 </div>
 </body>

@@ -35,7 +35,7 @@ public class UserService implements UserDetailsService {
 
     public boolean addUser(User user) {
         User userFromDb = userRepository.findByEmail(user.getEmail());
-        if(userFromDb != null){
+        if (userFromDb != null) {
             return false;
         }
         user.setActive(true);
@@ -45,22 +45,22 @@ public class UserService implements UserDetailsService {
         return true;
     }
 
-    public int totalGame(User user){
+    public int totalGame(User user) {
         Integer totalGame = gameRepository.findByUser(user).size();
         return totalGame == null ? 0 : totalGame;
     }
 
-    public int totalWin(User user){
+    public int totalWin(User user) {
         Integer totalWin = gameRepository.findByUserAndWin(user, true).size();
-        return totalWin == null ? 0 :  totalWin;
+        return totalWin == null ? 0 : totalWin;
     }
 
-    public int maxScore(User user){
+    public int maxScore(User user) {
         Integer masScore = gameRepository.findMaxScore(user);
         return masScore == null ? 0 : masScore;
     }
 
-    public double avgScore(User user){
+    public double avgScore(User user) {
         Double avgScore = gameRepository.findAvrScore(user);
         return avgScore == null ? 0.0 : avgScore;
     }
@@ -70,6 +70,6 @@ public class UserService implements UserDetailsService {
     }
 
     public List<User> getAllUsers() {
-       return userRepository.findAll();
+        return userRepository.findAll();
     }
 }

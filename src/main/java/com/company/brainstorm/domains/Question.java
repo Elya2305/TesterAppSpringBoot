@@ -5,7 +5,7 @@ import java.util.Set;
 
 
 @Entity
-@Table(name="questions")
+@Table(name = "questions")
 public class Question {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -13,11 +13,14 @@ public class Question {
     private String context;
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "question")
     private Set<Answer> answers;
+
     public Question() {
     }
+
     public Question(String context) {
         this.context = context;
     }
+
     public Integer getId() {
         return id;
     }
@@ -42,12 +45,13 @@ public class Question {
         this.answers = answers;
     }
 
-    public Answer getCorrectAnswer(){
+    public Answer getCorrectAnswer() {
         return answers.stream()
                 .filter(Answer::isCorrect)
                 .findFirst()
                 .get();
     }
+
     @Override
     public String toString() {
         return "Question{" +

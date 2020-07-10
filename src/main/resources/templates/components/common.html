@@ -8,10 +8,12 @@
 <body>
 <nav th:fragment="navbar(game)" class="navbar navbar-expand-lg navbar-light" style="background-color: #ededed;">
     <a class="navbar-brand" href="#">
-        <img src="https://i.pinimg.com/originals/41/00/09/4100098c8af8b04589771aa58935f4c8.png" width="30" height="30" class="d-inline-block align-top" alt="">
+        <img src="https://i.pinimg.com/originals/41/00/09/4100098c8af8b04589771aa58935f4c8.png" width="30" height="30"
+             class="d-inline-block align-top" alt="">
         BrainStorm
     </a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
@@ -22,7 +24,7 @@
             <li class="nav-item">
                 <a th:class="${game}? 'nav-link disabled' : 'nav-link'" href="/statistics">Statistics</a>
             </li>
-            <li  class="nav-item">
+            <li class="nav-item">
                 <a th:class="${game}? 'nav-link disabled' : 'nav-link'" href="/game">Game</a>
             </li>
             <li th:if="${game}">
@@ -30,12 +32,12 @@
             </li>
         </ul>
     </div>
-        <div class="navbar-text" th:text="${username}"></div>
-            <form th:action="@{/logout}" method="post">
-                <input type="hidden" name="_csrf" value="{{_csrf.token}}"/>
-                <button type="submit" class="btn btn-outline-secondary ml-3">Log out</button>
-            </form>
-    </nav>
+    <div class="navbar-text" th:text="${username}"></div>
+    <form th:action="@{/logout}" method="post">
+        <input type="hidden" name="_csrf" value="{{_csrf.token}}"/>
+        <button type="submit" class="btn btn-outline-secondary ml-3">Log out</button>
+    </form>
+</nav>
 </body>
 <div th:fragment="js-lb">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

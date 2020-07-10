@@ -3,7 +3,7 @@ package com.company.brainstorm.domains;
 import javax.persistence.*;
 
 @Entity
-@Table(name="answers")
+@Table(name = "answers")
 public class Answer {
     @Id
     @GeneratedValue

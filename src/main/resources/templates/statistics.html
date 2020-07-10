@@ -21,12 +21,12 @@
         </tr>
         </thead>
         <tbody>
-            <tr th:each="user, iter : ${users}">
-                <td th:text="${iter.index} + 1"></td>
-                <td th:text="${user.getUsername()}"></td>
-                <td th:text="${avgScore.get(__${iter.index}__)}"></td>
-                <td th:text="${totalGames.get(__${iter.index}__)}"></td>
-            </tr>
+        <tr th:each="user, iter : ${users}">
+            <td th:text="${iter.index} + 1"></td>
+            <td th:text="${user.getUsername()}"></td>
+            <td th:text="${avgScore.get(__${iter.index}__)}"></td>
+            <td th:text="${totalGames.get(__${iter.index}__)}"></td>
+        </tr>
         </tbody>
     </table>
 </div>

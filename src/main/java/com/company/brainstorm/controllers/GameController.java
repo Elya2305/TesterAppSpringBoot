@@ -32,48 +32,47 @@ public class GameController {
         this.questionService = questionService;
         this.gameService = gameService;
         this.answerService = answerService;
-//        this.questions = questionService.random5();
-        this.counter = 0;
+//        this.questions = questionService.random5();  CommandLineRunner stuff... DB loaded
+        this.counter = 0;                                  // AFTER .random5()
         this.userAnswers = new ArrayList<>();
     }
 
     @GetMapping("/game")
-    public String game(@AuthenticationPrincipal User user, Model model){
-        if(counter == 0) {
+    public String game(@AuthenticationPrincipal User user, Model model) {
+        if (counter == 0) {
             userAnswers.clear();
             this.questions = questionService.random5();
         }
-        if(counter > 0) userAnswers.add(new Answer("", false));
-        if(counter==5) return endGame(model, user, false);
+        if (counter > 0) userAnswers.add(new Answer("", false));
+        if (counter == 5) return endGame(model, user, false);
         model.addAttribute("username", user.getUsername());
         model.addAttribute("question", questions.get(counter++));
         return "game";
     }
 
     @PostMapping("/game")
-    public String checkQuestion(@RequestParam String id, @AuthenticationPrincipal User user, Model model){
+    public String checkQuestion(@RequestParam String id, @AuthenticationPrincipal User user, Model model) {
         model.addAttribute("username", user.getUsername());
-        if(counter == 1) userAnswers.clear();
+        if (counter == 1) userAnswers.clear();
         Answer answer = answerService.getAnswerById(Integer.parseInt(id));
         userAnswers.add(answer);
         gameService.checkAnswer(answer, counter, user);
-        if(counter==5) return endGame(model, user, false);
+        if (counter == 5) return endGame(model, user, false);
         model.addAttribute("question", questions.get(counter++));
         return "game";
     }
 
-    private String endGame(Model model, User user, boolean stopGame){
+    private String endGame(Model model, User user, boolean stopGame) {
         counter = 0;
-        model.addAttribute("questions",questions);
-        model.addAttribute("answers",userAnswers);
+        model.addAttribute("questions", questions);
+        model.addAttribute("answers", userAnswers);
         model.addAttribute("username", user.getUsername());
-//        questions = questionService.random5();
-        gameService.getVerdicts(model,stopGame, user);
+        gameService.getVerdicts(model, stopGame, user);
         return "results";
     }
 
     @GetMapping("/endgame")
-    public String end(@AuthenticationPrincipal User user, Model model){
+    public String end(@AuthenticationPrincipal User user, Model model) {
         return endGame(model, user, true);
     }
 }

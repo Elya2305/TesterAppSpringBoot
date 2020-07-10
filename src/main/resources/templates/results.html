@@ -16,13 +16,14 @@
         </tr>
         </thead>
         <tbody>
-            <tr th:each="qv,iter : ${questions}">
-                <td th:text="${iter.index} + 1"></td>
-                <td th:text="${qv.getContext()}"></td>
-                <td th:if="${(iter.index) < #lists.size(answers)}" th:text="${answers.get(__${iter.index}__).getContext()}"></td>
-                <td th:unless="${(iter.index) < #lists.size(answers)}" th:text="''"></td>
-                <td th:text="${qv.getCorrectAnswer().getContext()}"></td>
-            </tr>
+        <tr th:each="qv,iter : ${questions}">
+            <td th:text="${iter.index} + 1"></td>
+            <td th:text="${qv.getContext()}"></td>
+            <td th:if="${(iter.index) < #lists.size(answers)}"
+                th:text="${answers.get(__${iter.index}__).getContext()}"></td>
+            <td th:unless="${(iter.index) < #lists.size(answers)}" th:text="''"></td>
+            <td th:text="${qv.getCorrectAnswer().getContext()}"></td>
+        </tr>
         </tbody>
     </table>
 </div>

@@ -21,14 +21,14 @@ public class QuestionService {
     }
 
     public List<Question> random5() {
-        if (questions == null){
+        if (questions == null) {
             questions = questionRepository.findAll();
         }
         Collections.shuffle(questions);
         return questions;
     }
 
- //if there were more than 5 questions in db:
+    //if there were more than 5 questions in db:
 
 //    public List<Question> random5() {
 //        List<Integer> list = IntStream
