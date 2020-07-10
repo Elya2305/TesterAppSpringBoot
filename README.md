@@ -14,7 +14,7 @@ don't have to do any configurations).
 
 The templates are made using **thymeleaf**
  and **bootstrap 4**. On the `profile`
- page you'll see a statistics of
+ page you'll see statistics of
  your games. You're also free to look at
  general statistics (go on the `statistics` 
  page). To play the game go to `game` page.
