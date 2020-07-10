@@ -6,6 +6,10 @@ millionaire game that includes:
 * **Spring Data**
 * **Spring Boot**
 
+To test the project right click on class ApplicationSpringBoot >
+ Run as .. > Spring Boot App. Then go to
+ http://localhost:8080
+
 All the users have virtual accounts,
 so you need to register at first.  
 You'll not find any users registered as
