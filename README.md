@@ -1,4 +1,4 @@
-##Millionaire game
+# Millionaire game
 This is a simple simulation of
 millionaire game that includes:
 * **Spring MVC**
